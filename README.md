@@ -1,24 +1,35 @@
+[Logo](docs/bp_litex_logo.png) TODO: add a logo
+
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 # BlackParrot in LiteX
+> **Note:** Tested on Ubuntu 18.04
+
+## FPGA Demo (TODO: update video)
+[![asciicast](https://asciinema.org/a/326077.svg)](https://asciinema.org/a/326077)
 
 
-## Getting Started
-
-TODO: modify getting started [Getting Started (Full)](GETTING_STARTED.md)
-
-### Prerequisites
-
-```
-BP sources (https://github.com/litex-hub/pythondata-cpu-blackparrot)
-RISC-V toolchain built for IA architecture (prebuilt binaries provided by LiteX works fine)
-Verilator (tested with Verilator 4.031)
-```
-
-### Installing
+## Prerequisites
 
 ```
-https://github.com/litex-hub/pythondata-cpu-blackparrot is required to run BP in LiteX. 
-source ./setEnvironment.sh #should be sourced each time you open a terminal or just add this line to bashrc
+$ sudo apt install build-essential device-tree-compiler wget git python3-setuptools libevent-dev libjson-c-dev
+$ sudo apt install verilator # for simulation
+$ git clone https://github.com/enjoy-digital/linux-on-litex-blackparrot
+$ cd linux-on-litex-blackparrot
 ```
+
+## Installing LiteX and a RISC-V toolchain
+
+```
+$ wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
+$ chmod +x litex_setup.py
+$ ./litex_setup.py init
+$ sudo ./litex_setup.py install
+$ sudo ./litex_setup.py gcc
+$ source ./setEnvironment.sh # set necessary environment variables for BP (should be sourced each time you open a terminal or just add this line to bashrc)
+```
+
+## Pre-built Bitstreams/Linux images
+Pre-built bistream for Genesys Kintex 2 and pre-built Berkeley boot loader (bbl) can be found in the prebuilt folder.
 
 ## Running BIOS 
 
@@ -27,7 +38,6 @@ source ./setEnvironment.sh #should be sourced each time you open a terminal or j
 cd $LITEX/litex/tools
 ./litex_sim.py --cpu-type blackparrot --cpu-variant standard --output-dir build/BP_Trial
 ```
-[![asciicast](https://asciinema.org/a/326077.svg)](https://asciinema.org/a/326077)
 
 ### FPGA
 ```
