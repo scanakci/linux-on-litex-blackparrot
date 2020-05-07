@@ -28,7 +28,7 @@ $ sudo ./litex_setup.py gcc
 $ source ./setEnvironment.sh # set necessary environment variables for BP (should be sourced each time you open a terminal or just add this line to bashrc)
 ```
 
-## Pre-built Bitstreams/Linux images
+## Pre-built Bitstream and BBL
 Pre-built bistream for Genesys Kintex 2 and pre-built Berkeley boot loader (bbl) can be found in the prebuilt folder.
 
 ## Running BIOS 
@@ -53,18 +53,22 @@ Modify litex_sim.py by replacing soc.add_constant("ROM_BOOT_ADDRESS", 0x40000000
 
 ./litex_sim.py --cpu-type blackparrot --cpu-variant standard --integrated-rom-size 40960 --output-dir build/BP_newversion_linux_ram/ --threads 4 --ram-init build/tests/boot.bin.uart.simu.trial
 
-TODO: add prebuilt bbl files into python-data repository
-
 ```
 
-### FPGA
+### FPGA (Coming soon!)
 
 ```
-Coming soon!
+$ Load the FPGA bitstream
+$ Load the Linux images over Serial
+$ $LITEX/litex/tools/litex_term --images=images.json /dev/ttyUSBX --no-crc
 ```
+## Generating the BBL (optional) 
 
-
-
-
+```sh
+$ git clone freedom-sdk
+$ cd freedom-sdk
+$ make bbl
+```
+The BBL is located in *work/riscv-pk/*. #todo double check
 
 
