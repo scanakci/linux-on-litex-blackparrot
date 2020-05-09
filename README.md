@@ -55,7 +55,7 @@ First modify $LITEX/litex/litex_sim.py by replacing soc.add_constant("ROM_BOOT_A
 Next, launch simulation.
 ```
 $ cd linux-on-litex-blackparrot
-$ $LITEX/litex/litex_sim.py --cpu-type blackparrot --cpu-variant standard --integrated-rom-size 40960 --output-dir $PWD/build/BP_linux_simu/ --ram-init prebuilt/simulation/genesys/bbl
+$ $LITEX/litex/litex_sim.py --cpu-type blackparrot --cpu-variant standard --integrated-rom-size 40960 --output-dir $PWD/build/BP_linux_simu/ --ram-init prebuilt/simulation/Genesys2/bbl
 
 ```
 
