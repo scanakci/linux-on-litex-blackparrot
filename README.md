@@ -1,10 +1,11 @@
-[Logo](docs/bp_litex_logo.png) TODO: add a logo
-
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 # BlackParrot in LiteX
+
+This repository presents necessary steps to run Linux on FPGA and simulation level using BP core integrated into LiteX.
 > **Note:** Tested on Ubuntu 18.04
 
-## FPGA Demo (TODO: update video)
+## FPGA Demo
 
 https://www.youtube.com/watch?v=npeDkfEMsoI&feature=youtu.be
 
