@@ -5,7 +5,8 @@
 > **Note:** Tested on Ubuntu 18.04
 
 ## FPGA Demo (TODO: update video)
-[![asciicast](https://asciinema.org/a/326077.svg)](https://asciinema.org/a/326077)
+
+https://www.youtube.com/watch?v=npeDkfEMsoI&feature=youtu.be
 
 
 ## Prerequisites
