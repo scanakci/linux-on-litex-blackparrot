@@ -1,0 +1,28 @@
+jobs:
+  include:
+    - os: linux
+      dist: xenial
+      language: python
+      python: "3.6"
+
+install:
+  # Get Migen / LiteX / Cores
+  - cd ~/
+  - pip3 install requests
+  - cp $TRAVIS_BUILD_DIR/litex_setup.py .
+  - python3 litex_setup.py init install
+  # Install the LiteX version being tested
+  - cd $TRAVIS_BUILD_DIR
+  - python3 setup.py install
+
+before_script:
+  # Get RISC-V toolchain
+  - cd ~/
+  - python3 litex_setup.py gcc
+  - ls $PWD/riscv64-*/bin/
+  - export PATH=$PATH:$(echo $PWD/riscv64-*/bin/)
+  - riscv64-unknown-elf-gcc --version
+
+script:
+  - cd $TRAVIS_BUILD_DIR
+  - python3 setup.py test
