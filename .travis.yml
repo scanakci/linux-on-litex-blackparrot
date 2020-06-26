@@ -10,6 +10,15 @@ install:
   - cd ~/
   - pip3 install requests
   - wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
+  # Get rid of other cores to test only BP
+  - sed -i 's/.*pythondata-misc-tapcfg.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-lm32.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-mor1kx.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-picorv32.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-serv.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-vexriscv.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-rocket.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-minerva.*//' litex_setup.py
   - chmod +x litex_setup.py
   - python3 ./litex_setup.py init install
   # Install the LiteX version being tested
