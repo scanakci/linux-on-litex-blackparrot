@@ -10,6 +10,7 @@ before_install:
 
 install:
   # Get Migen / LiteX / Cores
+  - ls
   - cd ~/
   - mkdir litex
   - cd litex
@@ -24,6 +25,7 @@ install:
   - sed -i 's/.*pythondata-cpu-vexriscv.*//' litex_setup.py
   - sed -i 's/.*pythondata-cpu-rocket.*//' litex_setup.py
   - sed -i 's/.*pythondata-cpu-minerva.*//' litex_setup.py
+  - sed -i 's/.*pythondata-cpu-microwatt.*//' litex_setup.py
   # Setup LiteX
   - chmod +x litex_setup.py
   - python3 ./litex_setup.py init install dev
