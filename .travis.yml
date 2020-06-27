@@ -26,7 +26,7 @@ install:
   - sed -i 's/.*pythondata-cpu-minerva.*//' litex_setup.py
   # Setup LiteX
   - chmod +x litex_setup.py
-  - python3 ./litex_setup.py init install
+  - python3 ./litex_setup.py init install dev
   - cd litex/litex/soc/cores/cpu/blackparrot
   - source ./setEnvironment.sh
 
