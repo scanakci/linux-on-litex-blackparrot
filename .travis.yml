@@ -13,6 +13,7 @@ install:
   - ls
   - cd ~/
   - mkdir litex
+  - ls
   - cd litex
   - pip3 install requests
   - wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
