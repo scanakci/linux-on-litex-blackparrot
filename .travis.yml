@@ -10,11 +10,8 @@ before_install:
 
 install:
   # Get Migen / LiteX / Cores
-  - pwd
-  - ls
   - cd ~/
   - mkdir litex
-  - ls
   - cd litex
   - pip3 install requests
   - wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
@@ -43,6 +40,7 @@ before_script:
   - riscv64-unknown-elf-gcc --version
 
 script:
-  - cd ~/linux-on-litex-blackparrot
+  - cd $TRAVIS_BUILD_DIR
+  - pwd
   - chmod +x test.sh
   - ./test.sh 
