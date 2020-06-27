@@ -33,7 +33,7 @@ install:
 before_script:
   # Get RISC-V toolchain
   - cd ~/
-  - python3 litex_setup.py gcc
+  - python3 ./litex_setup.py gcc
   - ls $PWD/riscv64-*/bin/
   - export PATH=$PATH:$(echo $PWD/riscv64-*/bin/)
   - riscv64-unknown-elf-gcc --version
