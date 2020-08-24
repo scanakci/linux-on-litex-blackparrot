@@ -6,6 +6,20 @@
 This repository presents necessary steps to run Linux on FPGA and simulation level using BP core integrated into LiteX.
 > **Note:** Tested on Ubuntu 18.04
 
+> **Note:** Since both BlackParrot and Litex are under active development, newer updates on LiteX or BP can cause some compatibility issues. If the most recent BP and LiteX do not work, please switch to to following commits (by updating their submodules as well):
+```
+LiteX: c136113a9b71cbcbdf525aaad38acb012f4a12f3
+LiteDRAM: fe478382e16ff3592e07774580c96bde0dc82da3
+litex-boards: c7404e356f737a58be4527b3ae8de20fce96defd
+blackparrot: 7eb1037637d8515a259e204117b7b1273b1c2941
+```
+> Also copy the files and folders in patch_files to the following paths:
+```
+core.py -> litex/soc/cores/cpu/blackparrot/
+setEnvironment.sh -> litex/soc/cores/cpu/blackparrot/
+Makefile -> litex/soc/software/bios/
+bp_litex/ -> litex/soc/cores/cpu/blackparrot/
+```
 ## FPGA Demo
 
 https://www.youtube.com/watch?v=npeDkfEMsoI&feature=youtu.be
