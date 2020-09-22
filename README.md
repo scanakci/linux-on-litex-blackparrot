@@ -89,8 +89,8 @@ Load the FPGA bitstream top.bit to your FPGA (you can use vivado hardware manage
 
 This step will boot up LinuX after copying bbl to DRAM through UART. The whole process will take roughly 15 minutes. 
 
-## Generating the BBL (optional TODO) 
-
+## Generating the BBL manually 
+If you need to generate a BBL from scratch, please follow these steps.
 ```sh
 $ git clone https://github.com/bsg-external/freedom-u-sdk.git
 $ cd freedom-sdk
