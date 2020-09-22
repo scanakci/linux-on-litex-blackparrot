@@ -93,9 +93,9 @@ This step will boot up LinuX after copying bbl to DRAM through UART. The whole p
 
 ```sh
 $ git clone https://github.com/bsg-external/freedom-u-sdk.git
+$ cd freedom-sdk
 $ git checkout blackparrot_mods
 $ git submodule update --init --recursive
-$ cd freedom-sdk
 $ make bbl LITEX_MODE=-DLITEX_MODE //The BBL is located in work/riscv-pk/
 $ riscv64-unknown-elf-objcopy -O binary work/riscv-pk/bbl boot.bin.uart.fpga // final bbl that needs to be loaded in DRAM
 ```
