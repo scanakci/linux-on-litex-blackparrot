@@ -78,12 +78,12 @@ $ $LITEX/litex/litex_sim.py --cpu-type blackparrot --cpu-variant standard --inte
 ### FPGA
 Generate the bitstream 'top.bit' under build/BP_trial/gateware folder
 ```
-$LITEX/litex/boards/genesys2.py --cpu-type blackparrot --cpu-variant standard --output-dir $PWD/build/BP_Trial --integrated-rom-size 51200 --build  
+$ LITEX/litex/boards/genesys2.py --cpu-type blackparrot --cpu-variant standard --output-dir $PWD/build/BP_Trial --integrated-rom-size 51200 --build  
 ```
 In another terminal, launch LiteX terminal.
 ```
-cd linux-on-litex-blackparrot
-sudo $LITEX/litex/tools/litex_term.py /dev/ttyUSBX --images images.json --no-crc
+$ cd linux-on-litex-blackparrot
+$ sudo $LITEX/litex/tools/litex_term.py /dev/ttyUSBX --images images.json --no-crc
 ```
 Load the FPGA bitstream top.bit to your FPGA (you can use vivado hardware manager)
 
