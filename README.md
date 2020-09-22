@@ -38,13 +38,12 @@ $ git clone https://github.com/enjoy-digital/linux-on-litex-blackparrot
 ```
 $ wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
 $ chmod +x litex_setup.py
-$ ./litex_setup.py init
-$ sudo ./litex_setup.py install
+$ ./litex_setup.py init install --user
 ```
 
 ## Installing RISC-V toolchain
 ```
-$ sudo ./litex_setup.py gcc 
+$ ./litex_setup.py gcc 
 ```
 Do not forget to add RISC-V toolchain binary path to your PATH.
 
