@@ -28,7 +28,7 @@ install:
   # Setup LiteX
   - chmod +x litex_setup.py
   - python3 ./litex_setup.py init install dev
-  - pip install git+https://github.com/litex-hub/pythondata-misc-tapcfg.git
+    #  - pip install git+https://github.com/litex-hub/pythondata-misc-tapcfg.git
   - cd litex/litex/soc/cores/cpu/blackparrot
   - source ./setEnvironment.sh
 
