@@ -13,7 +13,7 @@ https://github.com/black-parrot/litex/tree/working_linux
 ```
 ## FPGA Demo
 
-https://www.youtube.com/watch?v=npeDkfEMsoI&feature=youtu.be
+[![https://www.youtube.com/watch?v=npeDkfEMsoI](https://img.youtube.com/vi/npeDkfEMsoI/0.jpg)](https://www.youtube.com/watch?v=npeDkfEMsoI "BP LiteX Linux FPGA")
 
 
 ## Prerequisites
