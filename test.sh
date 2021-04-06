@@ -2,7 +2,7 @@
 cd $LITEX/litex/tools
 
 #Test: BIOS terminal pops?
-timeout 120s ./litex_sim.py --cpu-type blackparrot --cpu-variant sim --output-dir blackparrot_BIOS > bios.log
+timeout 180s ./litex_sim.py --cpu-type blackparrot --cpu-variant sim --output-dir blackparrot_BIOS > bios.log
 
 cat bios.log
 if grep -rn 'Console\|No boot medium found' bios.log; then
