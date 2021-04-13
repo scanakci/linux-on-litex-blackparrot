@@ -35,6 +35,6 @@ jobs:
       - name: Run Tests
         run: |
           export PATH=/usr/local/riscv/bin:$PATH
-          sed -i 's/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x40000000\)/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x80000000\)/' litex/litex/litex_sim.py
+          sed -i 's/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x40000000\)/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x80000000\)/' litex/tools/litex_sim.py
           source litex/soc/cores/cpu/blackparrot/setEnvironment.sh
           litex_sim --cpu-type blackparrot --cpu-variant standard --output-dir $PWD/build/BP_linux_simu/ --ram-init prebuilt/simulation/Genesys2/boot.bin.uart.simu
