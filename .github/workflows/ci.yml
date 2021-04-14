@@ -35,7 +35,7 @@ jobs:
       - name: Run Tests
         run: |
           export PATH=/usr/local/riscv/bin:$PATH
-          sed -i 's/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x40000000\)/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x80000000\)/' litex/litex/tools/litex_sim.py
+          sed -i 's/soc\.add_constant("ROM_BOOT_ADDRESS", 0x40000000)/soc\.add_constant("ROM_BOOT_ADDRESS", 0x80000000)/' litex/litex/tools/litex_sim.py
           pushd .
           cd  litex/litex/soc/cores/cpu/blackparrot
           source ./setEnvironment.sh
