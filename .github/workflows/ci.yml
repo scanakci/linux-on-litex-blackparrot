@@ -23,7 +23,6 @@ jobs:
           git clone --branch working_linux https://github.com/black-parrot-hdk/litex
           cd litex
           python3 litex_setup.py init install --user
-          git -C ../pythondata-cpu-blackparrot checkout master
           ./apply_patches.sh
       # Install RISC-V GCC
       - name: Install RISC-V GCC
@@ -37,5 +36,8 @@ jobs:
         run: |
           export PATH=/usr/local/riscv/bin:$PATH
           sed -i 's/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x40000000\)/soc\.add_constant\("ROM_BOOT_ADDRESS", 0x80000000\)/' litex/litex/tools/litex_sim.py
-          source litex/litex/soc/cores/cpu/blackparrot/setEnvironment.sh
+          pushd .
+          cd  litex/litex/soc/cores/cpu/blackparrot
+          source ./setEnvironment.sh
+          popd
           litex_sim --cpu-type blackparrot --cpu-variant standard --output-dir $PWD/build/BP_linux_simu/ --ram-init prebuilt/simulation/Genesys2/boot.bin.uart.simu
