@@ -23,9 +23,7 @@ jobs:
           git clone --branch working_linux https://github.com/black-parrot-hdk/litex
           cd litex
           python3 litex_setup.py init install --user
-          cd pythondata-cpu-blackparrot
-          git checkout master
-          cd ..
+          git -C ../pythondata-cpu-blackparrot checkout master
           ./apply_patches.sh
       # Install RISC-V GCC
       - name: Install RISC-V GCC
