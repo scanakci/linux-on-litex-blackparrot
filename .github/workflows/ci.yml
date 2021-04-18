@@ -40,4 +40,8 @@ jobs:
           cd  litex/litex/soc/cores/cpu/blackparrot
           source ./setEnvironment.sh
           popd
-          litex_sim --cpu-type blackparrot --cpu-variant standard --output-dir $PWD/build/BP_linux_simu/ --ram-init prebuilt/simulation/Genesys2/boot.bin.uart.simu
+          litex_sim --cpu-type blackparrot \
+            --cpu-variant standard \
+            --output-dir $PWD/build/BP_linux_simu/ \
+            --ram-init prebuilt/simulation/Genesys2/boot.bin.uart.simu \
+            | sed '/buildroot login: root/q'
