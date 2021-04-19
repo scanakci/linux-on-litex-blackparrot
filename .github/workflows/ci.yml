@@ -20,7 +20,7 @@ jobs:
       # Install (n)Migen / LiteX / Cores
       - name: Install LiteX
         run: |
-          git clone --branch working_linux_non_interactive https://github.com/black-parrot-hdk/litex
+          git clone --branch recreate_working_linux https://github.com/black-parrot-hdk/litex
           cd litex
           python3 litex_setup.py init install --user
           ./apply_patches.sh
