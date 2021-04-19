@@ -40,6 +40,7 @@ jobs:
           cd  litex/litex/soc/cores/cpu/blackparrot
           source ./setEnvironment.sh
           popd
+          set -o pipefail
           litex_sim --cpu-type blackparrot \
             --cpu-variant standard \
             --output-dir $PWD/build/BP_linux_simu/ \
