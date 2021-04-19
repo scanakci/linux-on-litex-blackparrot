@@ -44,4 +44,4 @@ jobs:
             --cpu-variant standard \
             --output-dir $PWD/build/BP_linux_simu/ \
             --ram-init prebuilt/simulation/Genesys2/boot.bin.uart.simu \
-            | sed '/buildroot login: root/q'
+            | sed '/Linux version/q'
