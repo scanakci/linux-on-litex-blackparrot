@@ -23,7 +23,6 @@ jobs:
           git clone --branch recreate_working_linux https://github.com/black-parrot-hdk/litex
           cd litex
           python3 litex_setup.py init install --user
-          ./apply_patches.sh
       # Install RISC-V GCC
       - name: Install RISC-V GCC
         run: |
