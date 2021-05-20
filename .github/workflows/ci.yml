@@ -13,16 +13,16 @@ jobs:
       # Install Tools
       - name: Install Tools
         run: |
-          sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler
+          sudo apt-get install wget build-essential python3 libevent-dev libjson-c-dev device-tree-compiler flex libfl-dev
           pip3 install setuptools
           pip3 install requests
           pip3 install pexpect
       # Install (n)Migen / LiteX / Cores
       - name: Install LiteX
         run: |
-          git clone --branch recreate_working_linux https://github.com/black-parrot-hdk/litex
+          git clone --branch ulx3s https://github.com/black-parrot-hdk/litex
           cd litex
-          git checkout 9f7506b
+          git checkout 9bfd7d94
           python3 litex_setup.py init install --user
       # Install RISC-V GCC
       - name: Install RISC-V GCC
@@ -31,6 +31,16 @@ jobs:
           python3 litex_setup.py gcc
           sudo mkdir /usr/local/riscv
           sudo cp -r $PWD/../riscv64-*/* /usr/local/riscv
+      # Modify, Build and Install Verilator
+      - name: Install Verilator
+        run: |
+          git clone https://github.com/verilator/verilator.git
+          cd verilator
+          sed -i 's/LINE_TOKEN_MAX = 40000/LINE_TOKEN_MAX = 1000000/' src/V3PreProc.h
+          autoconf
+          ./configure
+          make -j2
+          sudo make install
       # Test
       - name: Run Tests
         run: |
