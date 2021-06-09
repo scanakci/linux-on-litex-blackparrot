@@ -57,7 +57,6 @@ Pre-built bistream for Genesys Kintex 2 and pre-built Berkeley boot loader (bbl)
 
 
 ### Simulation
-First modify $LITEX/litex/litex_sim.py by replacing soc.add_constant("ROM_BOOT_ADDRESS", 0x40000000) with soc.add_constant("ROM_BOOT_ADDRESS", 0x80000000)
 
 Next, launch simulation.
 ```
