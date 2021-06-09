@@ -44,8 +44,7 @@ Do not forget to add RISC-V toolchain binary path to your PATH.
 Add the following lines to your bashrc to set up BlackParrot environment variables
 
 ```
-pushd .
-cd  PATH/TO/LITEX/litex/soc/cores/cpu/blackparrot
+pushd PATH/TO/LITEX/litex/soc/cores/cpu/blackparrot
 source ./setEnvironment.sh
 popd
 ```
