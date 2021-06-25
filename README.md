@@ -76,7 +76,9 @@ $ sudo $LITEX/litex/tools/litex_term.py /dev/ttyUSBX --images images.json --no-c
 ```
 Load the FPGA bitstream top.bit to your FPGA (you can use vivado hardware manager)
 
-This step will boot up LinuX after copying bbl to DRAM through UART. The whole process will take roughly 15 minutes. 
+This step will boot up LinuX after copying bbl to DRAM through UART. The whole process will take roughly 15 minutes. You can login with username `root` and password `blackparrot`.
+
+
 
 ## Generating the BBL manually 
 If you need to generate a BBL from scratch, please follow these steps.
