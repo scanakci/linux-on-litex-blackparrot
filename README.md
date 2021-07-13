@@ -5,12 +5,8 @@
 
 This repository presents necessary steps to run Linux on FPGA and simulation level using BP core integrated into LiteX.
 
-> **Note:** Tested on Ubuntu 18.04
+> **Note:** Tested on Ubuntu 20.04
 
-> **Note:** Since both BlackParrot and Litex are under active development, newer updates on LiteX or BP can cause some compatibility issues. If the following instructions do not produce the intended output, please use the following link that includes necessary instructions to run BP on Linux with compatible commits.
-```
-https://github.com/black-parrot/litex/tree/working_linux
-```
 ## FPGA Demo
 
 [![https://www.youtube.com/watch?v=npeDkfEMsoI](https://img.youtube.com/vi/npeDkfEMsoI/0.jpg)](https://www.youtube.com/watch?v=npeDkfEMsoI "BP LiteX Linux FPGA")
@@ -21,7 +17,7 @@ https://github.com/black-parrot/litex/tree/working_linux
 ```
 $ sudo apt install build-essential device-tree-compiler wget git python3-setuptools libevent-dev libjson-c-dev
 $ sudo apt install verilator # for simulation
-$ git clone https://github.com/enjoy-digital/linux-on-litex-blackparrot
+$ git clone https://github.com/scanakci/linux-on-litex-blackparrot
 
 ```
 ## Installing LiteX
@@ -38,19 +34,9 @@ $ ./litex_setup.py gcc
 ```
 Do not forget to add RISC-V toolchain binary path to your PATH.
 
- 
-## Set necessary environment variables for BlackParrot
-
-Add the following lines to your bashrc to set up BlackParrot environment variables
-
-```
-pushd PATH/TO/LITEX/litex/soc/cores/cpu/blackparrot
-source ./setEnvironment.sh
-popd
-```
 
 ## Pre-built Bitstream and BBL
-Pre-built bistream for Genesys Kintex 2 and pre-built Berkeley boot loader (bbl) can be found in the prebuilt folder.
+Pre-built bistream for the Arty and pre-built Berkeley boot loader (bbl) can be found in the prebuilt folder.
 
 ## Running Linux 
 
@@ -60,28 +46,43 @@ Pre-built bistream for Genesys Kintex 2 and pre-built Berkeley boot loader (bbl)
 Next, launch simulation.
 ```
 $ cd linux-on-litex-blackparrot
-$ $LITEX/litex/litex_sim.py --cpu-type blackparrot --cpu-variant standard --integrated-rom-size 40960 --output-dir $PWD/build/BP_linux_simu/ --ram-init prebuilt/simulation/Genesys2/bbl
+$ lxsim --cpu-type blackparrot --cpu-variant standard --with-sdram --sdram-init prebuilt/simulation/Arty/boot.bin.uart.sim
 
 ```
 
 ### FPGA
-Generate the bitstream 'top.bit' under build/BP_trial/gateware folder
+Generate the bitstream for the Arty:
 ```
-$ LITEX/litex/boards/genesys2.py --cpu-type blackparrot --cpu-variant standard --output-dir $PWD/build/BP_Trial --integrated-rom-size 51200 --build  
+$ cd litex
+$ litex-boards/litex_boards/targets/digilent_arty.py --build --sys-clk-freq 20e6 --cpu-type blackparrot --cpu-variant standard --variant=a7-100 --csr-csv "csr-arty.csv"
 ```
+
+Load the FPGA bitstream to the Arty:
+```
+$ cd litex
+$ litex-boards/litex_boards/targets/digilent_arty.py --load --sys-clk-freq 20e6 --cpu-type blackparrot --cpu-variant standard --variant=a7-100 --csr-csv "csr-arty.csv"
+```
+Alternatively you can can find bitfile `digilent_arty.bit` in `build/gateware` and upload it using vivado hardware manager.
+
 In another terminal, launch LiteX terminal.
 ```
 $ cd linux-on-litex-blackparrot
-$ sudo $LITEX/litex/tools/litex_term.py /dev/ttyUSBX --images images.json --no-crc
+$ lxterm /dev/ttyUSBX --kernel prebuilt/fpga/Arty/boot.bin.uart.fpga --kernel-adr 0x80000000 --speed=115200
 ```
-Load the FPGA bitstream top.bit to your FPGA (you can use vivado hardware manager)
 
-This step will boot up LinuX after copying bbl to DRAM through UART. The whole process will take roughly 15 minutes. You can login with username `root` and password `blackparrot`.
+This step will boot up LinuX after copying bbl to DRAM through UART. The whole process will take roughly 20 minutes. You can login with username `root` and password `blackparrot`.
 
 
 
 ## Generating the BBL manually 
 If you need to generate a BBL from scratch, please follow these steps.
+
+For now please use this branch of riscv-pk https://github.com/developandplay/riscv-pk/tree/blackparrot_mods.
+
+Make sure to adjust the memory capacity in the [device_litex.dts](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/device_litex.dts#L29) file.
+
+Additionally adjust the location of the [UART CSR](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/machine/uart_lr.c#L9) to match the output of `csr-arty.csv`.
+
 ```sh
 $ git clone https://github.com/bsg-external/freedom-u-sdk.git
 $ cd freedom-sdk
