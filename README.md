@@ -70,6 +70,8 @@ $ cd linux-on-litex-blackparrot
 $ lxterm /dev/ttyUSBX --kernel prebuilt/fpga/Arty/boot.bin.uart.fpga --kernel-adr 0x80000000 --speed=115200
 ```
 
+If the memory test fails you might need to adjust the [DRAM CL](https://github.com/enjoy-digital/litex/issues/933#issuecomment-873638621).
+
 This step will boot up LinuX after copying bbl to DRAM through UART. The whole process will take roughly 20 minutes. You can login with username `root` and password `blackparrot`.
 
 
