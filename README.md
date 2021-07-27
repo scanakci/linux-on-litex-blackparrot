@@ -82,6 +82,7 @@ If you need to generate a BBL from scratch, please follow these steps.
 For now please use this branch of riscv-pk https://github.com/developandplay/riscv-pk/tree/blackparrot_mods.
 
 Make sure to adjust the memory capacity in the [device_litex.dts](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/device_litex.dts#L29) file.
+After initial generation if you want to adjust the dts make sure to `rm riscv-pk/machine/device.dtb` first.
 
 Additionally adjust the location of the [UART CSR](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/machine/uart_lr.c#L9) to match the output of `csr-arty.csv`.
 
