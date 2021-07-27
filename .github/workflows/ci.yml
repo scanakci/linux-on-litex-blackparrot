@@ -38,5 +38,6 @@ jobs:
             --cpu-variant standard \
             --with-sdram \
             --sdram-init prebuilt/simulation/boot_simulation.bin \
+            --non-interactive \
             --threads 2 \
             | sed '/Welcome to Buildroot/q; /Traceback (most recent call last):/q1'
