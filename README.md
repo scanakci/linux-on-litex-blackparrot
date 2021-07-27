@@ -45,7 +45,7 @@ Pre-built bistream for the Arty and pre-built Berkeley boot loader (bbl) can be 
 Next, launch simulation.
 ```
 $ cd linux-on-litex-blackparrot
-$ lxsim --cpu-type blackparrot --cpu-variant standard --with-sdram --sdram-init prebuilt/simulation/Arty/boot.bin.uart.sim
+$ lxsim --cpu-type blackparrot --cpu-variant standard --with-sdram --sdram-init prebuilt/simulation/boot_simulation.bin
 
 ```
 
@@ -66,7 +66,7 @@ Alternatively you can can find bitfile `digilent_arty.bit` in `build/gateware` a
 In another terminal, launch LiteX terminal.
 ```
 $ cd linux-on-litex-blackparrot
-$ lxterm /dev/ttyUSBX --kernel prebuilt/fpga/Arty/boot.bin.uart.fpga --kernel-adr 0x80000000 --speed=115200
+$ lxterm /dev/ttyUSBX --kernel prebuilt/fpga/Arty/boot_digilent_arty.bin --kernel-adr 0x80000000 --speed=115200
 ```
 
 If the memory test fails you might need to adjust the [DRAM CL](https://github.com/enjoy-digital/litex/issues/933#issuecomment-873638621).
@@ -78,20 +78,18 @@ This step will boot up LinuX after copying bbl to DRAM through UART. The whole p
 ## Generating the BBL manually 
 If you need to generate a BBL from scratch, please follow these steps.
 
-For now please use this branch of riscv-pk https://github.com/developandplay/riscv-pk/tree/blackparrot_mods.
-
 Make sure to adjust the memory capacity in the [device_litex.dts](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/device_litex.dts#L29) file.
 After initial generation if you want to adjust the dts make sure to `rm riscv-pk/machine/device.dtb` first.
 
 Additionally adjust the location of the [UART CSR](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/machine/uart_lr.c#L9) to match the output of `csr-arty.csv`.
 
 ```sh
-$ git clone https://github.com/bsg-external/freedom-u-sdk.git
+$ git clone https://github.com/developandplay/freedom-u-sdk.git
 $ cd freedom-sdk
 $ git checkout blackparrot_mods
 $ git submodule update --init --recursive
 $ make bbl LITEX_MODE=-DLITEX_MODE //The BBL is located in work/riscv-pk/
-$ riscv64-unknown-elf-objcopy -O binary work/riscv-pk/bbl boot.bin.uart.fpga // final bbl that needs to be loaded in DRAM
+$ riscv64-unknown-elf-objcopy -O binary work/riscv-pk/bbl boot.bin // final bbl that needs to be loaded in DRAM
 ```
 
 
