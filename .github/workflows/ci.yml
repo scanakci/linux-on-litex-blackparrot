@@ -23,6 +23,7 @@ jobs:
           git clone https://github.com/enjoy-digital/litex.git
           cd litex
           python3 litex_setup.py init install --user
+          sed -i 's/sys_clk_freq = int(1e6)/sys_clk_freq = int(100e6)/g' litex/tools/litex_sim.py
       # Install RISC-V GCC
       - name: Install RISC-V GCC
         run: |
@@ -39,5 +40,4 @@ jobs:
             --with-sdram \
             --sdram-init prebuilt/simulation/boot_simulation.bin \
             --non-interactive \
-            --threads 2 \
             | sed '/Welcome to Buildroot/q; /Traceback (most recent call last):/q1'
