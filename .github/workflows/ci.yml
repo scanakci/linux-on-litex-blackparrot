@@ -28,6 +28,7 @@ jobs:
       - name: Install RISC-V GCC
         run: |
           cd litex
+          pip3 install meson ninja
           python3 litex_setup.py gcc
           sudo mkdir /usr/local/riscv
           sudo cp -r $PWD/../riscv64-*/* /usr/local/riscv
