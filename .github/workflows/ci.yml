@@ -20,14 +20,14 @@ jobs:
       # Install (n)Migen / LiteX / Cores
       - name: Install LiteX
         run: |
-          git clone https://github.com/enjoy-digital/litex.git
           cd litex
+          git submodule update --init --recursive
           python3 litex_setup.py init install --user
           sed -i 's/sys_clk_freq = int(1e6)/sys_clk_freq = int(100e6)/g' litex/tools/litex_sim.py
       # Install RISC-V GCC
       - name: Install RISC-V GCC
         run: |
-          wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
+          cd litex
           python3 litex_setup.py gcc
           sudo mkdir /usr/local/riscv
           sudo cp -r $PWD/../riscv64-*/* /usr/local/riscv

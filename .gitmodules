@@ -1,0 +1,7 @@
+[submodule "litex"]
+	path = litex
+	url = https://github.com/enjoy-digital/litex.git
+[submodule "freedom-u-sdk"]
+	path = freedom-u-sdk
+	url = https://github.com/bsg-external/freedom-u-sdk
+	branch = blackparrot_mods
