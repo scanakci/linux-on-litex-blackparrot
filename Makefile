@@ -36,4 +36,5 @@ simulation-non-interactive: prebuilt/simulation/boot_simulation.bin
 	litex_sim --cpu-type blackparrot \
 		--cpu-variant standard \
 		--with-sdram \
+		--sdram-init prebuilt/simulation/boot_simulation.bin \
 		--non-interactive \
