@@ -14,22 +14,24 @@ This repository presents necessary steps to run Linux on FPGA and simulation lev
 ## Prerequisites
 
 ```
-$ sudo apt install build-essential device-tree-compiler wget git python3-setuptools libevent-dev libjson-c-dev
-$ sudo apt install verilator # for simulation
+$ sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler make
+$ pip3 install setuptools requests pexpect
 $ git clone https://github.com/scanakci/linux-on-litex-blackparrot
 
 ```
 ## Installing LiteX
 
 ```
-$ wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
-$ chmod +x litex_setup.py
-$ ./litex_setup.py init install --user
+$ cd litex
+$ git submodule update --init
+$ python3 litex_setup.py init install --user
 ```
 
 ## Installing RISC-V toolchain
 ```
-$ ./litex_setup.py gcc 
+$ cd litex
+$ pip3 install meson ninja
+$ python3 litex_setup.py gcc
 ```
 Do not forget to add RISC-V toolchain binary path to your PATH.
 
@@ -41,8 +43,13 @@ Pre-built bistream for the Arty and pre-built Berkeley boot loader (bbl) can be 
 
 
 ### Simulation
+Using make:
+```
+$ cd linux-on-litex-blackparrot
+$ make simulation
+```
 
-Next, launch simulation.
+Alternatively manually launch simulation.
 ```
 $ cd linux-on-litex-blackparrot
 $ lxsim --cpu-type blackparrot --cpu-variant standard --with-sdram --sdram-init prebuilt/simulation/boot_simulation.bin
@@ -50,23 +57,29 @@ $ lxsim --cpu-type blackparrot --cpu-variant standard --with-sdram --sdram-init 
 ```
 
 ### FPGA
-Generate the bitstream for the Arty:
+Using make:
+```
+$ cd linux-on-litex-blackparrot
+$ make arty
+```
+
+Alternatively manually generate the bitstream for the Arty:
 ```
 $ cd litex
 $ litex-boards/litex_boards/targets/digilent_arty.py --build --sys-clk-freq 20e6 --cpu-type blackparrot --cpu-variant standard --variant=a7-100 --csr-csv "csr-arty.csv"
 ```
 
-Load the FPGA bitstream to the Arty:
+Manually load the FPGA bitstream to the Arty:
 ```
 $ cd litex
 $ litex-boards/litex_boards/targets/digilent_arty.py --load --sys-clk-freq 20e6 --cpu-type blackparrot --cpu-variant standard --variant=a7-100 --csr-csv "csr-arty.csv"
 ```
-Alternatively you can can find bitfile `digilent_arty.bit` in `build/gateware` and upload it using vivado hardware manager.
+You can also find the bitfile `digilent_arty.bit` in the `build/gateware` folder and upload it using vivado hardware manager.
 
 In another terminal, launch LiteX terminal.
 ```
 $ cd linux-on-litex-blackparrot
-$ lxterm /dev/ttyUSBX --kernel prebuilt/fpga/Arty/boot_digilent_arty.bin --kernel-adr 0x80000000 --speed=115200
+$ lxterm /dev/ttyUSB* --kernel prebuilt/fpga/Arty/boot_digilent_arty.bin --kernel-adr 0x80000000 --speed=115200
 ```
 
 If the memory test fails you might need to adjust the [DRAM CL](https://github.com/enjoy-digital/litex/issues/933#issuecomment-873638621).
@@ -76,6 +89,12 @@ This step will boot up LinuX after copying bbl to DRAM through UART. The whole p
 
 
 ## Generating the BBL manually 
+Using make:
+```
+$ cd linux-on-litex-blackparrot
+$ make prebuilt/fpga/Arty/digilent_arty.bit
+```
+
 If you need to generate a BBL from scratch, please follow these steps.
 
 Make sure to adjust the memory capacity in the [device_litex.dts](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/device_litex.dts#L29) file.
@@ -84,7 +103,7 @@ After initial generation if you want to adjust the dts make sure to `rm riscv-pk
 Additionally adjust the location of the [UART CSR](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/machine/uart_lr.c#L9) to match the output of `csr-arty.csv`.
 
 ```sh
-$ git clone https://github.com/developandplay/freedom-u-sdk.git
+$ git clone https://github.com/bsg-external/freedom-u-sdk.git
 $ cd freedom-sdk
 $ git checkout blackparrot_mods
 $ git submodule update --init --recursive
