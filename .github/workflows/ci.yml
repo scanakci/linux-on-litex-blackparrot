@@ -14,28 +14,23 @@ jobs:
       - name: Install Tools
         run: |
           sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler
-          pip3 install setuptools
-          pip3 install requests
-          pip3 install pexpect
+          pip3 install setuptools requests pexpect
       # Install (n)Migen / LiteX / Cores
       - name: Install LiteX
         run: |
           cd litex
-          git submodule update --init --recursive
+          git submodule update --init
           python3 litex_setup.py init install --user
-          sed -i 's/sys_clk_freq = int(1e6)/sys_clk_freq = int(100e6)/g' litex/tools/litex_sim.py
       # Install RISC-V GCC
       - name: Install RISC-V GCC
         run: |
           cd litex
           pip3 install meson ninja
           python3 litex_setup.py gcc
-          sudo mkdir /usr/local/riscv
-          sudo cp -r $PWD/../riscv64-*/* /usr/local/riscv
       # Test
       - name: Run Tests
         run: |
-          export PATH=/usr/local/riscv/bin:$PATH
+          export PATH=$PATH:$(echo $PWD/riscv64-*/bin/)
           litex_sim --cpu-type blackparrot \
             --cpu-variant standard \
             --with-sdram \
