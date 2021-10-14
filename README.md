@@ -14,7 +14,7 @@ This repository presents necessary steps to run Linux on FPGA and simulation lev
 ## Prerequisites
 
 ```
-$ sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler make
+$ sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler make openocd
 $ pip3 install setuptools requests pexpect
 $ git clone https://github.com/scanakci/linux-on-litex-blackparrot
 
