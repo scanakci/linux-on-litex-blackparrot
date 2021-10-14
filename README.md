@@ -17,13 +17,13 @@ This repository presents necessary steps to run Linux on FPGA and simulation lev
 $ sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler make openocd
 $ pip3 install setuptools requests pexpect
 $ git clone https://github.com/scanakci/linux-on-litex-blackparrot
-
+$ cd linux-on-litex-blackparrot
+$ git submodule update --init
 ```
 ## Installing LiteX
 
 ```
 $ cd litex
-$ git submodule update --init
 $ python3 litex_setup.py init install --user
 ```
 
@@ -43,7 +43,7 @@ Pre-built bistream for the Arty and pre-built Berkeley boot loader (bbl) can be 
 
 
 ### Simulation
-Using make:
+Using make to:
 ```
 $ cd linux-on-litex-blackparrot
 $ make simulation
@@ -57,7 +57,7 @@ $ lxsim --cpu-type blackparrot --cpu-variant standard --with-sdram --sdram-init 
 ```
 
 ### FPGA
-Using make:
+Using make to build the bits:
 ```
 $ cd linux-on-litex-blackparrot
 $ make arty
@@ -103,8 +103,7 @@ After initial generation if you want to adjust the dts make sure to `rm riscv-pk
 Additionally adjust the location of the [UART CSR](https://github.com/developandplay/riscv-pk/blob/f18ec2bcccb4273b06f22b2813912933b959ae1d/machine/uart_lr.c#L9) to match the output of `csr-arty.csv`.
 
 ```sh
-$ git clone https://github.com/bsg-external/freedom-u-sdk.git
-$ cd freedom-sdk
+$ cd freedom-u-sdk
 $ git checkout blackparrot_mods
 $ git submodule update --init --recursive
 $ make bbl LITEX_MODE=-DLITEX_MODE //The BBL is located in work/riscv-pk/
