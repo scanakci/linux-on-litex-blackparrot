@@ -3,31 +3,8 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  rpi:
+    runs-on: rpi
     steps:
-      # Checkout Repository
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      # Install Tools
-      - name: Install Tools
-        run: |
-          sudo apt-get install wget build-essential python3 verilator libevent-dev libjson-c-dev device-tree-compiler make
-          pip3 install setuptools requests pexpect
-      # Install (n)Migen / LiteX / Cores
-      - name: Install LiteX
-        run: |
-          cd litex
-          git submodule update --init
-          python3 litex_setup.py init install --user
-      # Install RISC-V GCC
-      - name: Install RISC-V GCC
-        run: |
-          cd litex
-          pip3 install meson ninja
-          python3 litex_setup.py gcc
-      # Test
-      - name: Run Tests
-        run: |
-          make simulation-non-interactive | sed '/Welcome to Buildroot/q; /Traceback (most recent call last):/q1'
+      - name: my-step
+        run: echo "Hello World!"
