@@ -43,6 +43,9 @@ Pre-built bistream for the Arty and pre-built Berkeley boot loader (bbl) can be 
 
 
 ### Simulation
+Due to a regression in Litex you need to adjust the ram offset for BlackParrot in $LITEX/litex/litex_sim.py from
+`ram_boot_offset  = 0x40000000 # FIXME` to `ram_boot_offset  = 0x80000000 # FIXME`.
+
 Using make to:
 ```
 $ cd linux-on-litex-blackparrot
