@@ -24,7 +24,7 @@ $ git submodule update --init
 
 ```
 $ cd litex
-$ python3 litex_setup.py init install --user
+$ python3 litex_setup.py init install --user --config=full
 ```
 
 ## Installing RISC-V toolchain
